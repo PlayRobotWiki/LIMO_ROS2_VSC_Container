@@ -1,0 +1,35 @@
+// 嘗試看看VSC
+{
+    "dockerFile": "Dockerfile",
+    "build": {
+        "args": {
+            "WORKSPACE": "${containerWorkspaceFolder}"
+        }
+    },
+    "remoteUser": "root",
+    "runArgs": [
+        "--network=host",
+        "--cap-add=SYS_PTRACE",
+        "--cap-add=SYS_RAWIO",
+        "--privileged=true",
+        "--security-opt=seccomp:unconfined",
+        "--security-opt=apparmor:unconfined",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+        "--runtime=nvidia",
+        "--device /dev/ttyTHS1:/dev/ttyTHS1",
+        "--device /dev/ttyUSB0:/dev/ydlidar",
+        "--device=/dev/bus/usb:/dev/bus/usb"
+    ],
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "bash"
+            }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
+}
